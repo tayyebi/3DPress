@@ -22,3 +22,18 @@ window.ThreeDPressAdminInit = function() {
         });
     });
 };
+
+// Dynamically load remote three.js and STLLoader if needed
+function loadRemoteScript(url, callback) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.onload = callback;
+    script.src = url;
+    document.head.appendChild(script);
+}
+
+loadRemoteScript('https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js', function() {
+    loadRemoteScript('https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/STLLoader.min.js', function() {
+        // Now you can use THREE and STLLoader
+    });
+});

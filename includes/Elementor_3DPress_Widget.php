@@ -26,6 +26,6 @@ class Elementor_3DPress_Widget extends Widget_Base {
         $this->end_controls_section();
     }
     protected function render() {
-        echo do_shortcode('[three_dpress_form]');
+        echo do_shortcode('[threedpress_form]');
     }
 }

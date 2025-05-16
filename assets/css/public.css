@@ -2,7 +2,7 @@
 3DPress Public Styles
 */
 
-#three-dpress-form {
+#threedpress-form {
   max-width: 500px;
   margin: 2em auto;
   background: #fff;
@@ -12,19 +12,19 @@
   padding: 2em;
 }
 
-#three-dpress-form h3 {
+#threedpress-form h3 {
   margin-top: 0;
 }
 
-#three-dpress-form input[type="file"] {
+#threedpress-form input[type="file"] {
   margin-bottom: 1em;
 }
 
-#three-dpress-form .step {
+#threedpress-form .step {
   animation: fadeIn 0.3s;
 }
 
-#three-dpress-form button {
+#threedpress-form button {
   margin: 1em 0.5em 0 0;
   padding: 0.5em 1.5em;
   border: none;
@@ -33,7 +33,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
-#three-dpress-form button:hover {
+#threedpress-form button:hover {
   background: #005177;
 }
 
@@ -46,7 +46,7 @@
   justify-content: center;
 }
 
-#three-dpress-success {
+#threedpress-success {
   color: #008000;
   font-weight: bold;
   text-align: center;

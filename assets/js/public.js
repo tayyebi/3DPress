@@ -3,10 +3,10 @@
 
 // Multi-step form and STL viewer logic for 3DPress
 window.ThreeDPressFormInit = function() {
-    const container = document.getElementById('three-dpress-form');
+    const container = document.getElementById('threedpress-form');
     if (!container) return;
     container.innerHTML = `
-    <form id="three-dpress-order-form" enctype="multipart/form-data">
+    <form id="threedpress-order-form" enctype="multipart/form-data">
         <div class="step step-1">
             <h3>Step 1: Upload 3D Model</h3>
             <input type="file" name="model_file" accept=".stl,.obj" required />
@@ -40,7 +40,7 @@ window.ThreeDPressFormInit = function() {
             <button type="submit">Submit Order</button>
         </div>
     </form>
-    <div id="three-dpress-success" style="display:none;"></div>
+    <div id="threedpress-success" style="display:none;"></div>
     `;
     // Multi-step logic
     const steps = container.querySelectorAll('.step');
@@ -54,9 +54,9 @@ window.ThreeDPressFormInit = function() {
     // Update: AJAX endpoints for frontend
     if (typeof window.ThreeDPressFormInit === 'function') {
         // Add nonce to form for security
-        const nonce = document.getElementById('three-dpress-form').getAttribute('data-nonce');
+        const nonce = document.getElementById('threedpress-form').getAttribute('data-nonce');
         // Update fetch for materials
-        fetch(ajaxurl, {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'action=3dpress_get_materials'})
+        fetch(ajaxurl, {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'action=threedpress_get_materials'})
         .then(r=>r.json()).then(data => {
             const sel = document.getElementById('material-select');
             if (data && data.materials) {
@@ -70,9 +70,9 @@ window.ThreeDPressFormInit = function() {
         });
         // Update estimate calculation
         function updateEstimate() {
-            const form = document.getElementById('three-dpress-order-form');
+            const form = document.getElementById('threedpress-order-form');
             const fd = new FormData(form);
-            fd.append('action', '3dpress_get_estimate');
+            fd.append('action', 'threedpress_get_estimate');
             fd.append('nonce', nonce);
             fetch(ajaxurl, {method:'POST', body: fd})
             .then(r=>r.json()).then(data => {
@@ -85,18 +85,18 @@ window.ThreeDPressFormInit = function() {
         }
         document.querySelector('select[name="material"]').addEventListener('change', updateEstimate);
         // Update form submit
-        document.getElementById('three-dpress-order-form').onsubmit = function(e) {
+        document.getElementById('threedpress-order-form').onsubmit = function(e) {
             e.preventDefault();
-            const form = document.getElementById('three-dpress-order-form');
+            const form = document.getElementById('threedpress-order-form');
             const fd = new FormData(form);
-            fd.append('action', '3dpress_submit_order');
+            fd.append('action', 'threedpress_submit_order');
             fd.append('nonce', nonce);
             fetch(ajaxurl, {method:'POST', body: fd})
             .then(r=>r.json()).then(data => {
                 if (data.success) {
-                    document.getElementById('three-dpress-success').style.display = '';
-                    document.getElementById('three-dpress-success').textContent = data.data.message;
-                    document.getElementById('three-dpress-order-form').style.display = 'none';
+                    document.getElementById('threedpress-success').style.display = '';
+                    document.getElementById('threedpress-success').textContent = data.data.message;
+                    document.getElementById('threedpress-order-form').style.display = 'none';
                 } else {
                     alert(data.data.message || 'Submission failed.');
                 }
@@ -131,3 +131,18 @@ window.ThreeDPressFormInit = function() {
         reader.readAsArrayBuffer(file);
     });
 };
+
+// Dynamically load remote three.js and STLLoader if needed
+function loadRemoteScript(url, callback) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.onload = callback;
+    script.src = url;
+    document.head.appendChild(script);
+}
+
+loadRemoteScript('https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js', function() {
+    loadRemoteScript('https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/STLLoader.min.js', function() {
+        // Now you can use THREE and STLLoader
+    });
+});
