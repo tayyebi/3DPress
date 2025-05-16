@@ -1,0 +1,20 @@
+/*
+3DPress Admin Styles
+*/
+
+.three-dpress-stl-viewer {
+  border: 1px solid #ddd;
+  background: #fafafa;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.widefat th, .widefat td {
+  vertical-align: middle;
+}
+
+#three-dpress-form {
+  margin-top: 2em;
+}
