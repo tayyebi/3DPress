@@ -3,7 +3,7 @@ Contributors: tayyebi, github-copilot
 Tags: 3d printing, stl, woocommerce, order, upload, elementor
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: trunk
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
